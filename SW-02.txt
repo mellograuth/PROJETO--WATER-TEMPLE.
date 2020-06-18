@@ -1,1 +1,73 @@
 
+> ativar
+	#configure terminal
+	(config) #hostname SW-02
+(config) #ativar segredo TempleWater-123 #  
+Habilitar senha no Console
+	#configure terminal
+	(config) #line console 0
+	(config-line) #password TempleWater-123 #
+	(linha de configuração) #login
+  linha de configuração) #login local
+  Saída
+  Criar um banner
+	(config) #banner motd "ACESSO A ÁREA DE SERVIÇO. DE TI DA ÁGUA
+TEMPLE LTDA. "
+config) #DO WR
+Criar um usuário local
+ 	(config) #username privilégio linkdoti 15 segredo hey-listen-3 *
+  criar um usuário e senha local:
+  Configurar o serviço de SSH
+	(config) #ip nome do domínio watertemple.local
+	(config) #crypto key gera rsa módulo de chave geral 1024
+	(config) #line vty 0 15
+	(config-line) #transport input ssh
+	(config-line) #password hey-listen-3 *
+	(linha de configuração) #login
+  linha de configuração) #login local
+
+	(config) #vlan 99
+	(config-vlan) #name NATIVA
+Criar subinterface
+	(config) #interface g0 / 0.10
+  (config-subif) #encapsulation dot1q 10
+ (config) #interface g0 / 0,20
+ (config-subif) #encapsulation dot1q 20
+(config) #interface g0 / 0.30
+(config-subif) #encapsulation dot1q 30
+(config) #interface g0 / 0.40
+(config-subif) #do wr
+ATIVAR INTERFACE G0 / 0
+(config) #interface g0 / 0
+(config-if) #no shutdown
+DESATIVAR INTERFACE EM DESUSO
+  (config) #interface G0 / 2
+  (config-if)#shutdown
+  (config) #interface F0/1-22
+  (config-if)shutdown
+  
+  Definir bloqueio de usuário, caso ele erre a senha
+	(config)#login block-for 180 attempts 3 within 60
+	
+	Definir tamanho mínimo da senha dos usuários
+	(config)#security password min-length 8
+	
+	(config)#ip route [IP_DA_REDE_DE_DESTINO] [MÁSCARA_DA_REDE_DE_DESTINO] [IP_DO_ROTEADOR_QUE_CONHECE_ESSA_REDE]
+
+Criar rota padrão IPv4
+	(config)#ip route 0.0.0.0 0.0.0.0 [IP_DO_ROTEADOR_DA_SUA_ROTA_PADRÃO]
+
+Adicionar IPv6 a uma interface
+	(config-if)#ipv6 address [IP]/[MÁSCARA]
+	
+Adicionar IPv6 a uma interface link-local
+	(config-if)#ipv6 address [IP]/[MÁSCARA] link-local
+
+Criar rota padrão IPv6
+	(config)#ipv6 route ::/0 [IP_DO_ROTEADOR_DA_SUA_ROTA_PADRÃO]
+
+Ativar roteamento IPv6
+	(config)#ipv6 unicast-routing
+
+Criar rota estática IPv6
+	(config)#ipv6 route [IP_DA_REDE_DE_DESTINO]/[MÁSCARA_DA_REDE_DE_DESTINO] [IP_DO_ROTEADOR_QUE_CONHECE_ESSA_REDE]
