@@ -1,1 +1,61 @@
-
+>enable
+	#configure terminal
+	(config)#hostname RT-01
+(config)#enable secret  TempleWater-123#  
+Habilitar senha na Console
+	#configure terminal
+	(config)#line console 0
+	(config-line)#password TempleWater-123#
+	(config-line)#login
+  config-line)#login local
+  exit
+  Criar um banner
+	(config)#banner motd "ACESSO APENAS PARA O DEPTO. DE TI DA WATER
+TEMPLE LTDA."
+config)#DO WR
+Criar um usuário local
+ 	(config)#username  linkdoti  privilege 15 secret hey-listen-3*
+  criar um  usuário e senha local:
+  Configurar o serviço de SSH
+	(config)#ip domain-name watertemple.local
+	(config)#crypto key generate rsa general-key modulus 1024
+	(config)#line vty 0 15
+	(config-line)#transport input ssh
+	(config-line)#password  hey-listen-3*
+	(config-line)#login
+  config-line)#login local
+  Criar VLAN
+	(config)#vlan  10
+	(config-vlan)#name  ADMINISTRACAO
+Criar VLAN
+	(config)#vlan 20
+	(config-vlan)#name  RH
+  Criar VLAN
+	(config)#vlan 30
+	(config-vlan)#name  TI
+  Criar VLAN
+	(config)#vlan  40
+	(config-vlan)#name  SERVIDORES
+  Criar VLAN
+	(config)#vlan 50
+	(config-vlan)#name  WI-FI
+  Criar VLAN
+	(config)#vlan 99
+Criar subinterface
+	(config)#interface g0/0.10
+  (config-subif)#encapsulation dot1q 10
+ (config)#interface g0/0.20
+ (config-subif)#encapsulation dot1q [id-da-vlan]
+(config)#interface g0/0.30
+(config-subif)#encapsulation dot1q 30
+(config)#interface g0/0.40
+(config-subif)#encapsulation dot1q 40
+(config)#interface g0/0.50
+(config-subif)#encapsulation dot1q 50
+(config-subif)#do wr
+ATIVAR INTERFACE G0/0
+(config)#interface g0/0
+(config-if)#no shutdown
+DESATIVAR INTERFACES EM DESUSO
+  (config)#interface  G0/2
+  
